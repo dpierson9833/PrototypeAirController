@@ -1,0 +1,13 @@
+flights will have a digit variable ranging from 1-100
+1-25 scheduled to depart at same time, 26-50, 51-75, 76-99
+when flights fall under the same time table, push those flights into some type of list
+once the quarter lists are created they need to do something
+that something is if the are in the qtrNArriving list they need to assigned to a GateID corresponding to the expectedGateID, if thet ID is occupied, assign to an empty gate. (create an enum for gateIDs)
+if they are in the qtrNTakeOff list they need to be sent to the take off class, and handled there.
+ 
+ 
+ 
+ 
+ 
+ Not split into arrivals and departures
+ Send to either gates or prep for takeoff
