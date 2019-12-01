@@ -176,6 +176,21 @@ public class GateManipulator {
 	}
 	
 	/**
+	 * removes Pid from gate
+	 * 
+	 * @param gateID
+	 */
+	public void removePID(int gID) {
+		int index = gID - 1;
+		
+		gateList.get(index).setPlaneID(-1);
+		gateList.set(index, gateList.get(index));
+		
+		//TESTING 
+		System.out.println("Removing plane from gate " + gateList.get(index).getGateName());
+	}
+	
+	/**
 	 * update multiple gates
 	 * 
 	 * @param gateName
@@ -202,9 +217,11 @@ public class GateManipulator {
 	}
 	
     /**
+     * converts a list of gates to a list of flights that occupy those gates
      * 
      * @param gateList 
-     * @return
+     * @param ld
+     * @return FlightList
      */
     public FlightList convertGateListToFlights(Iterator gateList, Loader ld) {
     	System.out.println("Inside GateManipulator.convertGateListToFlights");

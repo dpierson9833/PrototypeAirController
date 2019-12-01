@@ -1,10 +1,12 @@
 package takeoffandlanding;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import gates.GateManipulator;
 import gates.RunwayManipulator;
 import gates.Runways;
+import scheduler.Flight;
 import scheduler.FlightList;
 import scheduler.Loader;
 
@@ -19,6 +21,10 @@ public class RunwayControl {
 	private GateManipulator gm;
 	private Takeoff to;
 	private Landing ln;
+	private String rwStatus1 = "";
+	private String rwStatus2 = "";
+	private String rwStatus3 = "";
+	private String rwStatus4 = "";
 	
 	/**
 	 * constructor for the RunwayLaunch object launch option
@@ -49,44 +55,86 @@ public class RunwayControl {
 	/**
 	 * causes the selected planes to depart using the runways
 	 */
-	public void departure() {
+	public void departure(FlightList fl) {
 		//get list of flights that are departing - DONE
-		//find an empty runway -
-		//remove flight from gate -
-		//send flight to runway -
-		//warmup -
+		//find an empty runway - DONE
+		//remove flight from gate - DONE
+		//send flight to runway - DONE
+		//warmup - 
 		//accelerating -
 		//leaving ground -
 		//clear runway - 
+		Iterator flIter;
 		Iterator runwayIter;
-		Runways emptyRunway = null;
-		fl = to.getTakeoffList();
-		
-		//going to try and use these for live updating messages
-		String rwStatus1 = "";
-		String rwStatus2 = "";
-		String rwStatus3 = "";
-		String rwStatus4 = "";
+		ArrayList<Runways> runways = new ArrayList();;
 		
 		do {
 			runwayIter = rm.createIterator();
 			
+			//remove planes from gates
+			flIter = fl.createIterator();
+			while(flIter.hasNext()) {
+				Flight flight = (Flight) flIter.next();
+				
+				gm.removePID(flight.getGateId());
+				flight.setGateId(-1);
+			}//end of while
+				
 			//get empty runway
 			while(runwayIter.hasNext()) {
 				Runways runway = (Runways) runwayIter.next();
 				
 				if (rm.runwayIsEmpty(runway)) {
-					emptyRunway = runway;
-					break;
+					runways.add(runway);
 				}
 			}//end of while
 			
+			//add planes to empty runway
+			flIter = fl.createIterator();
+			while(flIter.hasNext()) {
+				Flight flight = (Flight) flIter.next();
+				
+				//add planes to runways in list
+				for(Runways runway : runways) {
+					rm.updatingRunways(runway.getRunwayID(), flight.getFlightId());
+				}//end of for
+			}//end of while
 			
-			
-			
-			
+			//remove planes from runway
+			runwayIter = rm.createIterator();
+			while(runwayIter.hasNext()) {
+				Runways runway = (Runways) runwayIter.next();
+				
+				rm.updatingRunways(runway.getRunwayID(), -1);
+				//ADD MESSAGE HERE
+			}//end of while
+
 		}while(!allEmpty());//end of do-while
 	}
+	
+	/**
+	 * update status of runways to send to progress bar
+	 * 
+	 * @param int whichRunway
+	 * @param String message
+	 */
+	public void updateStatus(int whichRunway, String message) {
+		
+		//going to try and use these for live updating messages
+		if(whichRunway == 1) {
+			rwStatus1 = message;
+		}else if(whichRunway == 2) {
+			rwStatus2 = message;
+		}else if(whichRunway == 3) {
+			rwStatus3 = message;
+		}else if(whichRunway == 4) {
+			rwStatus4 = message;
+		}
+	}
+	
+	/**
+	 * removes flight from gate
+	 */
 	
 	/**
 	 * returns true if every runway is empty
