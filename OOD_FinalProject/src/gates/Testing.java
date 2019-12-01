@@ -1,6 +1,8 @@
 package gates;
 public class Testing {
 
+	//THIS REMAINS SO I CAN SEE HOW TO USE RUNWAYS
+	
 	public static void main(String[] args) {
 		GateManipulator A = new GateManipulator();
 		RunwayManipulator B = new RunwayManipulator();

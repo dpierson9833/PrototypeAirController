@@ -73,13 +73,17 @@ public class RunwayManipulator {
 	}
 	
 	/**
+	 * returns iterator of the RunwayManipulator class
 	 * 
-	 * @return
+	 * @return RunwayManipulator Iterator
 	 */
 	public Iterator createIterator() {
 		return runwayList.iterator();
 	}
 	
+	/**
+	 * utility method used for testing runways
+	 */
 	public void chaos() {
 		updatingRunways("R1", 8);
 		updatingRunways("R2", 1);

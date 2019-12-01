@@ -17,7 +17,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.WindowConstants;
 
 import gates.GateManipulator;
+import gates.Gates;
 import gates.RunwayManipulator;
+import scheduler.Flight;
+import scheduler.FlightList;
 import scheduler.Loader;
 import scheduler.PersistentTime;
 
@@ -28,14 +31,22 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Iterator;
+
 import javax.swing.JToggleButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+/**
+ * this class represents the driver and main bulk of the UI for our project
+ * 
+ * @author David
+ *
+ */
 public class PTapplicationGUI {
 
 	//declare ui elements
-	private JFrame frmPlaneAndTrain;
+	private JFrame frmPlane;
 	private JPanel panel;
 	private JTextField textField;
 	private JPasswordField passwordField;
@@ -75,7 +86,7 @@ public class PTapplicationGUI {
 			public void run() {
 				try {
 					PTapplicationGUI window = new PTapplicationGUI();
-					window.frmPlaneAndTrain.setVisible(true);
+					window.frmPlane.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -102,15 +113,15 @@ public class PTapplicationGUI {
 	 * initialize components
 	 */
 	private void initComponents() {
-		frmPlaneAndTrain = new JFrame();
-		frmPlaneAndTrain.setLocation(new Point(250, 250));
-		frmPlaneAndTrain.setTitle("Plane and Train Controller");
-		frmPlaneAndTrain.setBounds(100, 100, 440, 300);
-		frmPlaneAndTrain.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frmPlaneAndTrain.getContentPane().setLayout(new CardLayout(0, 0));
+		frmPlane = new JFrame();
+		frmPlane.setTitle("Aircraft Controller Prototype");
+		frmPlane.setBounds(100, 100, 440, 300);
+		frmPlane.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frmPlane.getContentPane().setLayout(new CardLayout(0, 0));
+		frmPlane.setLocationRelativeTo(null);
 		
 		panel = new JPanel();
-		frmPlaneAndTrain.getContentPane().add(panel, "panel");
+		frmPlane.getContentPane().add(panel, "panel");
 		panel.setLayout(new CardLayout(0, 0));
 		
 
@@ -317,7 +328,9 @@ public class PTapplicationGUI {
 	private void createEvents() {
 		CardLayout c = (CardLayout) panel_1.getLayout();
 		
-		//cancel button in login panel
+		/**
+		 * action listener for the page change to the welcome panel
+		 */
 		button_4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -325,15 +338,22 @@ public class PTapplicationGUI {
 			}
 		});
 		
-		//login button on welcome page
+		/**
+		 * action listener for the page change to the login panel
+		 */
 		button_6.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				
+				//CHECK CREDENTIALS HERE
+				
 				c.show(panel_1, "loginPanel");
 			}
 		});
 		
-		//login button on loginPanel
+		/**
+		 * action listener for the page change to the action panel
+		 */
 		button_5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -341,7 +361,9 @@ public class PTapplicationGUI {
 			}
 		});
 		
-		//exit button on actionPanel
+		/**
+		 * action listener for the exit button on the action panel
+		 */
 		button_2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -349,7 +371,9 @@ public class PTapplicationGUI {
 			}
 		});
 		
-		//Takeoff & Departure Button
+		/**
+		 * action listener for the Take-off and Departure button
+		 */
 		btnTakeoffDeparture.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -358,15 +382,45 @@ public class PTapplicationGUI {
 			}
 		});
 		
-		//Show active gates button
+		/**
+		 * action listener for the Show Active Gates button
+		 */
 		btnShowActiveGates.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "Gates 1-25 are open!");
+				while(true) {
+					//try and create live updates for gates here if you have time
+					break;
+				}
+				String message = "";
+				
+				//get full FlightList
+				FlightList fl = ld.getFullFlightList();
+				Iterator flIter = ld.getFullFlightList().createIterator();
+				
+				//get Gates
+				Iterator gatesIter = gm.createIterator();
+				
+				//display gates
+				while(gatesIter.hasNext()) {
+					Gates gate = (Gates) gatesIter.next();
+					
+					if(gate.getPlaneID() != -1) {
+						message += (gate.getGateName() + ": Flight No. " + gate.getPlaneID() + " to " + fl.getFlightAtGate(gate.getGateID(), flIter).getDestAp())
+									+ "\n\n";
+					}else {
+						message += (gate.getGateName() + ": EMPTY")
+									+ "\n\n";
+					}
+				}
+				
+				JOptionPane.showMessageDialog(null, message);
 			}
 		});
 		
-		//Select Time Function
+		/**
+		 * action lisener for the Select Time Combo box
+		 */
 		comboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -385,8 +439,5 @@ public class PTapplicationGUI {
 		        System.out.println("Quarter changed to " + pt.getTime() + " in program controller");
 			}
 		});
-	}
-	
-	private static void addPopup(Component component, final JPopupMenu popup) {
 	}
 }

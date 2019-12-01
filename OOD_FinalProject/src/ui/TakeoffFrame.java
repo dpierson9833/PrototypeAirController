@@ -26,6 +26,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * This class contains the TakeOff Window which is activated by pressing the Take-off and Departure button on the main UI
+ * @author David
+ *
+ */
 public class TakeoffFrame {
 
 	private JFrame frame;
