@@ -77,6 +77,9 @@ public class RunwayControl {
 				Flight flight = (Flight) flIter.next();
 				
 				gm.removePID(flight.getGateId());
+				
+				//SEND MESSAGE ABOUT PLANES LEAVING GATES
+				
 				flight.setGateId(-1);
 			}//end of while
 				
@@ -86,6 +89,9 @@ public class RunwayControl {
 				
 				if (rm.runwayIsEmpty(runway)) {
 					runways.add(runway);
+					updateStatus(runway.getRunwayID(), "Runway " + runway.getRunwayID() + " is empty and ready for a plane...");
+				}else {					
+					updateStatus(runway.getRunwayID(), "Runway " + runway.getRunwayID() + " is full, the plane will have to wait...");
 				}
 			}//end of while
 			
@@ -97,6 +103,7 @@ public class RunwayControl {
 				//add planes to runways in list
 				for(Runways runway : runways) {
 					rm.updatingRunways(runway.getRunwayID(), flight.getFlightId());
+					updateStatus(runway.getRunwayID(), "Flight no. " + flight.getFlightId() + " entering runway " + runway.getRunwayID() + "...");
 				}//end of for
 			}//end of while
 			
@@ -105,8 +112,8 @@ public class RunwayControl {
 			while(runwayIter.hasNext()) {
 				Runways runway = (Runways) runwayIter.next();
 				
+				updateStatus(runway.getRunwayID(), "Flight no " + runway.getPlaneID() + " has departed! " + "Runway " + runway.getRunwayID() + " is now empty...");
 				rm.updatingRunways(runway.getRunwayID(), -1);
-				//ADD MESSAGE HERE
 			}//end of while
 
 		}while(!allEmpty());//end of do-while
@@ -118,16 +125,16 @@ public class RunwayControl {
 	 * @param int whichRunway
 	 * @param String message
 	 */
-	public void updateStatus(int whichRunway, String message) {
+	public void updateStatus(String whichRunway, String message) {
 		
 		//going to try and use these for live updating messages
-		if(whichRunway == 1) {
+		if(whichRunway.equals("R1")) {
 			rwStatus1 = message;
-		}else if(whichRunway == 2) {
+		}else if(whichRunway.equals("R2")) {
 			rwStatus2 = message;
-		}else if(whichRunway == 3) {
+		}else if(whichRunway.equals("R3")) {
 			rwStatus3 = message;
-		}else if(whichRunway == 4) {
+		}else if(whichRunway.equals("R4")) {
 			rwStatus4 = message;
 		}
 	}
@@ -154,5 +161,15 @@ public class RunwayControl {
 		}
 		
 		return empty;
+	}
+	
+	/**
+	 * Recieves a string from the runway operations and sends it to the UI
+	 * 
+	 * @param status
+	 * @return status
+	 */
+	public String sendToProgressBar(String status) {
+		return status;
 	}
 }
