@@ -76,6 +76,26 @@ public class FlightList {
     public int getSize(){
         return size;
     }
+    
+    /**
+     * finds the index of a flight within the list
+     * 
+     * @param flightId
+     * @return index
+     */
+    public int findFlightIndex(int flightId) {
+    	int index = 0;
+    	
+    	for(Flight flight : flightList) {
+    		if(flightId == flight.getFlightId()) {
+    			return index;
+    		}
+    		
+    		index++;
+    	}
+    	
+    	return -1; //flight not found
+    }
 
     /**
      * returns Flight object at a specific index in the FlightList

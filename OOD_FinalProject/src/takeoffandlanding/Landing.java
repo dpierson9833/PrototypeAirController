@@ -7,5 +7,7 @@ package takeoffandlanding;
  *
  */
 public class Landing {
-
+	//check which flights are arriving in the quarter
+	//check if gate is filled
+	//put them in correct gate
 }

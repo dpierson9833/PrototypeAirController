@@ -13,9 +13,11 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
 
 import gates.GateManipulator;
+import gates.RunwayManipulator;
 import scheduler.Flight;
 import scheduler.FlightList;
 import scheduler.Loader;
+import takeoffandlanding.RunwayControl;
 import takeoffandlanding.Takeoff;
 
 import java.awt.GridLayout;
@@ -42,14 +44,21 @@ public class TakeoffFrame {
 	private JRadioButton rdbtnFlightTo_2;
 	private List<JRadioButton> list;
 	private GateManipulator gm;
+	private RunwayManipulator rm;
 	private Loader ld;
+	private Takeoff to;
+	private FlightList launchedFlights = new FlightList();
+	private ArrayList<Integer> flightIds = new ArrayList();
+	private int numTimes;
 	
 	/**
 	 * Create the application.
 	 */
-	public TakeoffFrame(GateManipulator gm, Loader ld) {
+	public TakeoffFrame(GateManipulator gm, RunwayManipulator rm, Takeoff to, Loader ld) {
 		this.gm = gm;
+		this.rm = rm;
 		this.ld = ld;
+		this.to = to;
 	}
 	
 	
@@ -60,7 +69,7 @@ public class TakeoffFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TakeoffFrame window = new TakeoffFrame(gm, ld);
+					TakeoffFrame window = new TakeoffFrame(gm, rm, to, ld);
 					window.initialize();
 					window.createEvents();
 					window.frame.setVisible(true);
@@ -131,7 +140,6 @@ public class TakeoffFrame {
 	 */
 	public void initRadioButtons() {
 		//Load takeoff to see what can be launched
-		Takeoff to = new Takeoff(gm, ld);
 		FlightList fl = to.getTakeoffList();
 		
 		//displays to console for debugging purposes
@@ -149,12 +157,34 @@ public class TakeoffFrame {
 		list = new ArrayList<>();
 		
 		//adds JRadioButtons for each eligible flight
+		int index = 0;
 		while(flightListIter.hasNext()) {
+			//TESTING
+			System.out.println("Inside initRadioButtons 'adds JRadioButtons for each eligible flight'");
+			
 			Flight flight = (Flight) flightListIter.next();
 			
+			//add it to the list of JRadioButtons
 			JRadioButton jrb = new JRadioButton("Flight " + flight.getFlightId() + " headed to " + flight.getDestAp());
+			
+			//NEED TO FIX THIS
+			//check to make sure we havent seen the flight before
+			boolean seenBefore = false;
+			for(JRadioButton jbut : list) {
+				if(jbut.getText() == jrb.getText()) {
+					seenBefore = true;
+				}
+			}
+			
 			list.add(jrb);
 			flightListPanel.add(jrb);
+			
+			flightIds.add(flight.getFlightId());
+			index++;
+			
+			System.out.println("\tIndex: " + index);
+			System.out.println("\tFlight ID: " + flight.getFlightId());
+			
 		}
 	}
 	
@@ -164,18 +194,81 @@ public class TakeoffFrame {
 	public void createEvents() {
 		btnExecuteTakeoff.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//TESTING
+				System.out.println("Inside action listener for executetakeoff");
+				
+				
+				launchedFlights = new FlightList();
 				String flightNames = "";
 				
+				int index = 0;
 				for (JRadioButton jrb : list) {
                     if (jrb.isSelected()) {
-                    	flightNames += jrb.getText() + " ";
+                    	flightNames += jrb.getText() + "\n ";
+                    	
+                    	//add flights to launchedFlights
+                    	addLaunchedFlight(flightIds.get(index));
+                    	index++;
+                    	//end of adding flights
+                    	
                     }//end of if
                 }//end of for
 				
+				//sets launched flights
+				to.setLaunchedFlights(launchedFlights);
+				
 				//if no flights are selected, change display
-				String message = (flightNames == "") ? "No planes were sent to the runway!" : "Sending " + flightNames + "to runway!";
-				JOptionPane.showMessageDialog(frame, message);
+				String message = "";
+				if(flightNames == "") {
+					message = "No planes were sent to the runway!";
+					JOptionPane.showMessageDialog(flightListPanel, message);
+					frame.dispose();
+				}else {
+					message = "Sending \n" + flightNames + "to runway!";
+					
+					//This will be removed when runways are working
+					JOptionPane.showMessageDialog(flightListPanel, message);
+					frame.dispose();
+				}
+				System.out.println(message); //FOR DEBUGGING
+				
+				
+				//remove flights from their gates
+				//remove planes from gates
+				Iterator flIter = launchedFlights.createIterator();
+				while(flIter.hasNext()) {
+					Flight flight = (Flight) flIter.next();
+					
+					System.out.println("\tFlight no. " + flight.getFlightId() + " removed from gate " + flight.getGateId());
+					
+					ld.getQuarter1().removeFromList(flight);
+					gm.updatePID(-1, flight.getGateId());
+					flight.setGateId(-1);
+				}//end of while
+				
+				
+				
+				
+				//currently unavailable functionality
+//				if(message.contains("Sending ")) {
+//					frame.dispose();
+//					RunwayFrame rw = new RunwayFrame(gm, rm, to.getLaunchedFlights());
+//					rw.createFrame();
+//				}
+				list = new ArrayList();
 			}
 		});
+	}
+	
+	/**
+	 * utility method that puts Flight into a list to be sent to be sent to the runway
+	 * 
+	 * @param flightId
+	 */
+	public void addLaunchedFlight(int flightId) {
+		FlightList fl = ld.getFullFlightList();
+		Flight flight = fl.getFlight(fl.findFlightIndex(flightId));
+		
+		launchedFlights.addToList(flight);
 	}
 }

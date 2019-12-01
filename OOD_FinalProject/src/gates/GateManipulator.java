@@ -163,6 +163,9 @@ public class GateManipulator {
 	public void updatePID(int pID, int gID) {
 		int index = gID - 1;
 		
+		//TESTNG
+		System.out.println("Inside update PID, recieving index " + index + " from flight " + pID );
+		
 		if(gateIsEmpty(gateList.get(index))){
 			gateList.get(index).setPlaneID(pID);
 			gateList.set(index, gateList.get(index));

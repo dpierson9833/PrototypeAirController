@@ -27,8 +27,9 @@ public class Takeoff {
 	private PersistentTime pt;
 	private GateManipulator gm;
 	private Loader ld;
-	private List<Flight> eligibleFlights;
+	private FlightList eligibleFlights;
 	private FlightList fl;
+	private FlightList launchedFlights = new FlightList();;
 	private ArrayList<Gates> eligibleGates;
 	private List<Gates> filledGateList;
 	private Gates gate;
@@ -43,6 +44,8 @@ public class Takeoff {
 	public Takeoff(GateManipulator gm, Loader l) {
 		this.gm = gm;
 		this.ld = l;
+		
+		System.out.println("NEW TAKEOFF CREATED");
 	}
 	
 	/**
@@ -64,10 +67,13 @@ public class Takeoff {
 		
 		//get list of eligible flights and check which ones are in gates
 		eligibleFlights = getQuarterList(currentTime);
+		Iterator elIter = eligibleFlights.createIterator();
 		
 		//get the gates of all eligible flights
 		eligibleGates = new ArrayList<>();
-		for(Flight flight : eligibleFlights) {
+		while(elIter.hasNext()) {
+			Flight flight = (Flight) elIter.next();
+			
 			if(flight.isInGate()) {
 				gate = gm.getGate(flight.getGateId());
 				eligibleGates.add(gate);
@@ -85,14 +91,13 @@ public class Takeoff {
 	}
 	
 	
-	
 	/**
 	 * return list of flights in current Quarter
 	 * 
 	 * @param currentTime
 	 * @return list of flights in current Quarter
 	 */
-	public List<Flight> getQuarterList(int currentTime){
+	public FlightList getQuarterList(int currentTime){
 		if(currentTime == 1) {
 			System.out.println("Returning quarter1");
 			return ld.getQuarter1();
@@ -109,5 +114,30 @@ public class Takeoff {
 			System.out.println("Unavailable Quarter Exception");
 			return null;
 		}//end of if else
+	}
+	
+	/**
+	 * returns the list of launched Flights
+	 * 
+	 * @return launchedFlights
+	 */
+	public FlightList getLaunchedFlights() {
+		if(launchedFlights == null) {
+			System.out.println("\t launched flights is null!");
+		}
+		
+		return launchedFlights;
+	}
+	
+	/**
+	 * sets the list of launched flights
+	 * 
+	 * @param launchedFlights
+	 */
+	public void setLaunchedFlights(FlightList launchedFlights) {
+		//launched flights is set
+		this.launchedFlights = launchedFlights;
+		
+		System.out.println("Launched flights successfully set");
 	}
 }

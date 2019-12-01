@@ -102,7 +102,7 @@ public class Loader {
 	 * 
 	 * @return Quarter 1 Flight List
 	 */
-	public List<Flight> getQuarter1(){
+	public FlightList getQuarter1(){
 		return q1001.getList();
 	}
 	
@@ -111,7 +111,7 @@ public class Loader {
 	 * 
 	 * @return Quarter 2 Flight List
 	 */
-	public List<Flight> getQuarter2(){
+	public FlightList getQuarter2(){
 		return q2001.getList();
 	}
 	
@@ -120,7 +120,7 @@ public class Loader {
 	 * 
 	 * @return Quarter 3 Flight List
 	 */
-	public List<Flight> getQuarter3(){
+	public FlightList getQuarter3(){
 		return q3001.getList();
 	}
 	
@@ -129,7 +129,7 @@ public class Loader {
 	 * 
 	 * @return Quarter 4 Flight List
 	 */
-	public List<Flight> getQuarter4(){
+	public FlightList getQuarter4(){
 		return q4001.getList();
 	}
 	
