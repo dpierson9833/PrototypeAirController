@@ -4,13 +4,14 @@ import java.util.Random;
 
 public class Singleton {
 
+	
 	private static Singleton firstInstance = null;
 
 	// Enum for 4 Seasons
 	enum Season {
 		WINTER, SPRING, SUMMER, FALL
 	}
-
+	
 	// Enum for 2 weather conditions
 	enum Weather {
 		CLEAR, SEVERE_WEATHER
@@ -57,10 +58,15 @@ public class Singleton {
 
 	// Generates a random weather event
 	Weather weather1 = e.randomWeather();
+	
 
 	Weather condition = weather1;
+	
 
 	Season Currseason = Cseason;
+	
+	
+	boolean status = false;
 
 	// Private singleton to prevent instantiation.
 	private Singleton() {
@@ -85,10 +91,44 @@ public class Singleton {
 		return firstInstance.weather1;
 	}
 
-	public Weather getCurrentWeather(Weather condition, Season Currseason) {
-		GetCurrentWeather.getWeather(condition, Currseason);
-		return condition;
+	int newWeather;	
+	String weatherCondition;
+	
+	public String getCurrentCondition(Weather condition) {
+		
+		String currentCondition = GetCurrentWeather.getCondition(condition);
+		
+		weatherCondition = currentCondition;
+		
+		return weatherCondition;
+	}
+	
+	public int getCurrentWeather(Weather condition, Season Currseason) {
+		
+		int currentWeather = GetCurrentWeather.getWeather(condition, Currseason);
+		
+		newWeather = currentWeather;
+		
+		
+		return newWeather;
+	}
+	
 
+	public boolean PreFlight() {
+		return status = Preflight.PreFlightStatus(condition);	
+	}
+
+//	public void DelayFlights(boolean status) {
+//		DelayFlights.GroundFlights(status);
+//	}
+	
+	public void DisplayCurrentWeather() {
+		
+		DisplayCurrentWeather newW = new DisplayCurrentWeather();
+		
+		newW.DisplayWeather(newWeather);
+		
+		newW.DisplayCondition(weatherCondition);
 	}
 
 }

@@ -1,20 +1,17 @@
 package weather;
 
-import java.util.concurrent.TimeUnit;
 //Command Pattern
-
+//Class not working at the moment 
 public class DelayFlights {
 
-	public static void GroundFlights() {
-		//Change all current and future flights to "Delay" on interface.
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public static void GroundFlights(boolean OktoFly) {
+		// Change all current and future flights to "Delay" on interface.
+		if (OktoFly = true) {
+			System.out.println("True");
+		} else {
+			System.out.println("All flights grounded");
+			
 		}
-		System.out.println("All flights grounded");
-		
 	}
-	
+
 }
