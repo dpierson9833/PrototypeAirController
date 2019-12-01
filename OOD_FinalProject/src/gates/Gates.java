@@ -1,5 +1,10 @@
 package gates;
 
+/**
+ * a class used for creating and manipulating gate objects
+ * @author Matt
+ *
+ */
 public class Gates {
 	private String gateName;
 	private int planeID;

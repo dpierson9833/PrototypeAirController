@@ -132,7 +132,7 @@ public class TakeoffFrame {
 	public void initRadioButtons() {
 		//Load takeoff to see what can be launched
 		Takeoff to = new Takeoff(gm, ld);
-		FlightList fl = to.takeoff();
+		FlightList fl = to.getTakeoffList();
 		
 		//displays to console for debugging purposes
 		Iterator flIter = fl.createIterator();

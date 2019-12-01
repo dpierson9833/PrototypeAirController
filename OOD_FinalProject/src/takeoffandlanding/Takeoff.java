@@ -12,9 +12,6 @@ import scheduler.Loader;
 import scheduler.PersistentTime;
 
 /**
- * 
- * @author Will
- * 
  * this class checks to prerequisite conditions for flights that are taking off
  * and sends a list of eligible flights to the TakeoffFrame to be instantiated as radio buttons
  *
@@ -22,6 +19,9 @@ import scheduler.PersistentTime;
  *
  *
  * NOTE: Checking of weather has been moved to the TakeOffFrame to make sure that no flights are launched
+ * 
+ * @author Will
+ * 
  */
 public class Takeoff {
 	private PersistentTime pt;
@@ -51,7 +51,7 @@ public class Takeoff {
 	 * 
 	 * @param flightList
 	 */
-	public FlightList takeoff() {
+	public FlightList getTakeoffList() {
 		//TEST
 		System.out.println("Inside Takeoff.takeoff()");
 		

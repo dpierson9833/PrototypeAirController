@@ -1,12 +1,12 @@
 package scheduler;
 
 /**
+ *  what flights are eligible for launch
+ *	this class is a Singleton implemetation of a persistent time that is used to determine
  * 
  * @author David
  *
  *
- *	this class is a Singleton implemetation of a persistent time that is used to determine
- *  what flights are eligible for launch
  */
 public class PersistentTime {
 	private static int currentTime;

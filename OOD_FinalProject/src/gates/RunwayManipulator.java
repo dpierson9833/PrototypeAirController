@@ -3,11 +3,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
+ * a class for manipulating runway objects to allow planes to occupy them and then 
+ * leave the runway to make room for new planes
  * 
  * @author Matt
  * 
- * a class for manipulating runway objects to allow planes to occupy them and then 
- * leave the runway to make room for new planes
  *
  */
 public class RunwayManipulator {

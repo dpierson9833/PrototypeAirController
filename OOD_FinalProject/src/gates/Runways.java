@@ -1,11 +1,11 @@
 package gates;
 
 /**
+ * this class is for instantiating runway objects that are manipulated by the runway manipulatoor class
+ * planes will occupy the runway and then be sent out
  * 
  * @author Matt
  *
- * this class is for instantiating runway objects that are manipulated by the runway manipulatoor class
- * planes will occupy the runway and then be sent out
  */
 public class Runways {
 	private String runwayID;
@@ -14,8 +14,8 @@ public class Runways {
 	/**
 	 * constructor for runway objects
 	 * 
-	 * @param rID
-	 * @param pID
+	 * @param runwayID
+	 * @param planeID
 	 */
 	Runways(String rID, int pID) {
 		this.runwayID = rID;

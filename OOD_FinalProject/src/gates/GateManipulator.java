@@ -8,10 +8,10 @@ import scheduler.FlightList;
 import scheduler.Loader;
 
 /**
+ * this class is a controller for the Gates objects
  * 
  * @author Matt
  * 
- * this class is a controller for the Gates objects
  *
  */
 public class GateManipulator {

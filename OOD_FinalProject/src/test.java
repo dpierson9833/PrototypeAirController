@@ -20,7 +20,7 @@ public class test {
 		
 		//Load takeoff to see what can be launched
 		Takeoff to = new Takeoff(gm, loader);
-		FlightList fl = to.takeoff();
+		FlightList fl = to.getTakeoffList();
 		Iterator flIter = fl.createIterator();
 		
 		while(flIter.hasNext()) {

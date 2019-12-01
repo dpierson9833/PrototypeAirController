@@ -3,6 +3,12 @@ package scheduler;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * a class to manipulate the 2nd Quarter of flights
+ * 
+ * @author Marc
+ *
+ */
 public class Q2List implements QuarterComposite {
     private String quarter;
     private List<Flight> q2Flights;

@@ -2,13 +2,11 @@ package scheduler;
 
 
 /**
- * @author Marc
- * 
  * This class creates the object instance of the flight class which will be used to
  * populate the runways and gates
  * 
- * It will need to check the weather conditions and schedule to determine which planes are
- * departing or arriving in the through the QuarterComposite interface
+ * @author Marc
+ * 
  */
 public class Flight {
     
