@@ -57,13 +57,12 @@ public class Singleton {
 	Season Cseason = r.randomSeason();
 
 	// Generates a random weather event
-	Weather weather1 = e.randomWeather();
+	Weather Cweather = e.randomWeather();
+
+	//Weather condition = weather1;
 	
 
-	Weather condition = weather1;
-	
-
-	Season Currseason = Cseason;
+	//Season Currseason = Cseason;
 	
 	
 	boolean status = false;
@@ -82,16 +81,26 @@ public class Singleton {
 
 		return firstInstance;
 	}
+	
+	
+	public void setSeason(Season season1) {
+		firstInstance.Cseason= season1;
+	}
 
-	public Season getSeason() {
+	public void setWeather(Weather weather1) {
+		firstInstance.Cweather= weather1;
+	}
+	
+	public static Season getSeason() {
 		return firstInstance.Cseason;
 	}
 
-	public Weather getWeather() {
-		return firstInstance.weather1;
+	
+	public static Weather getWeather() {
+		return firstInstance.Cweather;
 	}
 
-	int newWeather;	
+//	int newWeather;	
 	String weatherCondition;
 	
 	public String getCurrentCondition(Weather condition) {
@@ -102,33 +111,33 @@ public class Singleton {
 		
 		return weatherCondition;
 	}
-	
-	public int getCurrentWeather(Weather condition, Season Currseason) {
-		
-		int currentWeather = GetCurrentWeather.getWeather(condition, Currseason);
-		
-		newWeather = currentWeather;
-		
-		
-		return newWeather;
-	}
-	
-
-	public boolean PreFlight() {
-		return status = Preflight.PreFlightStatus(condition);	
-	}
-
-//	public void DelayFlights(boolean status) {
-//		DelayFlights.GroundFlights(status);
+//	
+//	public int getCurrentWeather(Weather condition, Season Currseason) {
+//		
+//		int currentWeather = GetCurrentWeather.getWeather(condition, Currseason);
+//		
+//		newWeather = currentWeather;
+//		
+//		
+//		return newWeather;
 //	}
-	
-	public void DisplayCurrentWeather() {
-		
-		DisplayCurrentWeather newW = new DisplayCurrentWeather();
-		
-		newW.DisplayWeather(newWeather);
-		
-		newW.DisplayCondition(weatherCondition);
+//	
+//
+	public boolean PreFlight() {
+		return status = Preflight.PreFlightStatus(Cweather);	
 	}
+//
+////	public void DelayFlights(boolean status) {
+////		DelayFlights.GroundFlights(status);
+////	}
+//	
+//	public void DisplayCurrentWeather() {
+//		
+//		DisplayCurrentWeather newW = new DisplayCurrentWeather();
+//		
+//		newW.DisplayWeather(newWeather);
+//		
+//		newW.DisplayCondition(weatherCondition);
+//	}
 
 }

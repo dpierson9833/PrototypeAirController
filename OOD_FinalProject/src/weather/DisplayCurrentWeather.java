@@ -12,5 +12,5 @@ public class DisplayCurrentWeather {
 	public void DisplayCondition(String status) {
 		System.out.println(status);	
 	}
-
+	
 }

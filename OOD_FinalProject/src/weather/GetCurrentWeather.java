@@ -3,22 +3,38 @@ import java.util.Random;
 
 public class GetCurrentWeather {
 
-
+//Returns string of Clear or Severe 
 	public static String getCondition(Singleton.Weather weatherCondition) {
 		String status;
 
 		if (weatherCondition == Singleton.Weather.CLEAR) {
 
 			status = "Clear";
+			System.out.println("*TEST1* Should return clear");
 
 		} else {
 
 			status = "Severe";
+			System.out.println("*TEST2* Should return severe");
 		}
 
 		return status;
 	}
-
+	
+	
+//Returns strng of weather value	
+	public static String getWeatherString(int weather) {
+		
+		String weatherString; 
+		
+		weatherString = Integer.toString(weather);
+		
+		return weatherString;
+		
+	}
+	
+	
+//int return type 
 	public static int getWeather(Singleton.Weather weather12, Singleton.Season season) {
 
 		int finalWeather = 0;

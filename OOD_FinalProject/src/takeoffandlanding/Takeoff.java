@@ -1,4 +1,5 @@
 package takeoffandlanding;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,6 +12,8 @@ import scheduler.Flight;
 import scheduler.FlightList;
 import scheduler.Loader;
 import scheduler.PersistentTime;
+import weather.GetCurrentWeather;
+import weather.Singleton;
 
 /**
  * this class checks to prerequisite conditions for flights that are taking off
@@ -34,7 +37,13 @@ public class Takeoff {
 	private ArrayList<Gates> eligibleGates;
 	private List<Gates> filledGateList;
 	private Gates gate;
-	private int currentTime;
+	private int currentTime; 
+	private Singleton single; //WeatherClass
+	public String condition; //WeatherClass
+	public boolean status; //WeatherClass
+	public String weatherString; //WeatherClass
+	
+
 	
 	/**
 	 * a constructor for the takeoff class
@@ -50,6 +59,63 @@ public class Takeoff {
 	}
 	
 	/**
+	 *a class to get current weather condition (Clear or Severe)
+	 *
+	 *@param Singleton.getWeather
+	 *
+	 */	
+	public String getCurrentWeather() {
+		
+		
+		//Test
+		System.out.println("Inside TakeOff.Singleton() -> getWeather");
+		
+		single = Singleton.getInstance();
+		
+		condition = single.getCurrentCondition(Singleton.getWeather());
+		
+		return condition;
+	}
+	
+	/**
+	 *a class to get the boolean value of OktoFly
+	 *
+	 *
+	 *
+	 */	
+	
+	public boolean getFlightStatus() {
+		
+		//Test
+		System.out.println("Inside Takeoff.Singleton() -> PreFlight ");
+		
+		single = Singleton.getInstance();
+		
+		return status = single.PreFlight();
+		
+		
+	}
+	
+	/**
+	 *a class to get the String value of weather
+	 *
+	 *@param GetCurrentWeather
+	 *@param getWeather
+	 *@param getSeason
+	 */	
+	
+	public String getWeatherString() {
+		
+		//Test
+		System.out.println("Inside Takeoff.Singleton() -> GetCurrentWeather");
+		
+		weatherString = GetCurrentWeather.getWeatherString(GetCurrentWeather.getWeather(Singleton.getWeather(), Singleton.getSeason()));
+		
+		return weatherString;
+		
+	}
+	
+		/**
 	 * checks the current time in order to decide what 
 	 * planes are able to be launched, and sends the list of occupied gates to the to takeoffFrame class
 	 * 
