@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 
 import gates.GateManipulator;
 import gates.Gates;
@@ -55,8 +56,10 @@ public class Takeoff {
 	 * @param flightList
 	 */
 	public FlightList getTakeoffList() {
+		
+		
 		//TEST
-		System.out.println("Inside Takeoff.takeoff()");
+		System.out.println("Inside Takeoff.getTakeoffList()");
 		
 		Iterator filledGateIterator;
 		fl = new FlightList();
@@ -67,6 +70,7 @@ public class Takeoff {
 		
 		//get list of eligible flights and check which ones are in gates
 		eligibleFlights = getQuarterList(currentTime);
+		
 		Iterator elIter = eligibleFlights.createIterator();
 		
 		//get the gates of all eligible flights
@@ -75,14 +79,18 @@ public class Takeoff {
 			Flight flight = (Flight) elIter.next();
 			
 			if(flight.isInGate()) {
+				System.out.println("IM INSIDE THE IF");
 				gate = gm.getGate(flight.getGateId());
 				eligibleGates.add(gate);
+				System.out.println("Inside Takeoff, Flight no. " + flight.getFlightId() + " fills gate " + flight.getGateId());
 			}
-		}
+		}//end of while
 		
+		
+		//problem has to be here
 		filledGateList = gm.getFilledGates(eligibleGates);
 		for(Gates gate : filledGateList) {
-			System.out.println("Gate " + gate.getGateName() + " is ready for takeoff!");
+			System.out.println("Inside takeoff, Gate " + gate.getGateName() + " is ready for takeoff!");
 		}
 		
 		fl = gm.convertGateListToFlights(filledGateList.iterator(), ld);

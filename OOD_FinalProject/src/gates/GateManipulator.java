@@ -16,31 +16,31 @@ import scheduler.Loader;
  */
 public class GateManipulator {
 	private ArrayList<Gates> gateList = new ArrayList();
-	private Gates a1 = new Gates("C3", -1, 1, 1); // Negative 1 symbolizes an empty field due to pointer exceptions when using null.
-	private Gates a2 = new Gates("B10", -1, 2, 2);
-	private Gates a3 = new Gates("A7", -1, 3, 3);
-	private Gates a4 = new Gates("A8", -1, 4, 4);
-	private Gates a5 = new Gates("T3", -1, 5, 5);
-	private Gates a6 = new Gates("B13", -1, 6, 6);
-	private Gates a7 = new Gates("A13", -1, 7, 7);
-	private Gates a8 = new Gates("C11", -1, 8, 8);
-	private Gates a9 = new Gates("A1", -1, 9, 9);
-	private Gates a10 = new Gates("C8", -1, 10, 10);
-	private Gates a11 = new Gates("B7", -1, 11, 11);
-	private Gates a12 = new Gates("T6", -1, 12, 12);
-	private Gates a13 = new Gates("A18", -1, 13, 13);
-	private Gates a14 = new Gates("B3", -1, 14, 14);
-	private Gates a15 = new Gates("C15", -1, 15, 15);
-	private Gates a16 = new Gates("A5", -1, 16, 16);
-	private Gates a17 = new Gates("A14", -1, 17, 17);
-	private Gates a18 = new Gates("A15", -1, 18, 18);
-	private Gates a19 = new Gates("A9", -1, 19, 19);
-	private Gates a20 = new Gates("B1", -1, 20, 20);
-	private Gates a21 = new Gates("B15", -1, 21, 21);
-	private Gates a22 = new Gates("B6", -1, 22, 22);
-	private Gates a23 = new Gates("C10", -1, 23, 23);
-	private Gates a24 = new Gates("B8", -1, 24, 24);
-	private Gates a25 = new Gates("C4", -1, 25, 25);
+	private Gates a1 = new Gates("C3", -1, 0, 0); // Negative 1 symbolizes an empty field due to pointer exceptions when using null.
+	private Gates a2 = new Gates("B10", -1, 1, 1);
+	private Gates a3 = new Gates("A7", -1, 2, 2);
+	private Gates a4 = new Gates("A8", -1, 3, 3);
+	private Gates a5 = new Gates("T3", -1, 4, 4);
+	private Gates a6 = new Gates("B13", -1, 5, 5);
+	private Gates a7 = new Gates("A13", -1, 6, 6);
+	private Gates a8 = new Gates("C11", -1, 7, 7);
+	private Gates a9 = new Gates("A1", -1, 8, 8);
+	private Gates a10 = new Gates("C8", -1, 9, 9);
+	private Gates a11 = new Gates("B7", -1, 10, 10);
+	private Gates a12 = new Gates("T6", -1, 11, 11);
+	private Gates a13 = new Gates("A18", -1, 12, 12);
+	private Gates a14 = new Gates("B3", -1, 13, 13);
+	private Gates a15 = new Gates("C15", -1, 14, 14);
+	private Gates a16 = new Gates("A5", -1, 15, 15);
+	private Gates a17 = new Gates("A14", -1, 16, 16);
+	private Gates a18 = new Gates("A15", -1, 17, 17);
+	private Gates a19 = new Gates("A9", -1, 18, 18);
+	private Gates a20 = new Gates("B1", -1, 19, 19);
+	private Gates a21 = new Gates("B15", -1, 20, 20);
+	private Gates a22 = new Gates("B6", -1, 21, 21);
+	private Gates a23 = new Gates("C10", -1, 22, 22);
+	private Gates a24 = new Gates("B8", -1, 23, 23);
+	private Gates a25 = new Gates("C4", -1, 24, 24);
 	private FlightList fl = new FlightList();
 	
 	/**
@@ -114,21 +114,23 @@ public class GateManipulator {
 		ArrayList<Gates> filledGates = new ArrayList();
 		
 		//TESTING
+		System.out.println("Inside GateManipulator.getFilledGates()");
 		if(quarterList.isEmpty()) {
-			System.out.println("Value passed to GateManipulator.getFilledGates in GateManipulator is empty");
+			System.out.println("\tValue passed to GateManipulator.getFilledGates in GateManipulator is empty");
 		}
 		//END TESTING
 		
 		//iterate over arraylist and add each filled gate to a list
 		for(Gates gates: quarterList) {
 			if(!gateIsEmpty(gates)) {
+				System.out.println("\tAdding gate " + gates.getGateName() + "to filledGatesList with plane no. " + gates.getPlaneID());
 				filledGates.add(gates);
 			}
 		}
 		
 		//TESTING
 		if(filledGates.isEmpty()) {
-			System.out.println("Filled gates in GateManipulator.getFilledGates() is empty");
+			System.out.println("\tFilled gates in GateManipulator.getFilledGates() is empty");
 		}
 		//END TESTING
 		
@@ -161,7 +163,7 @@ public class GateManipulator {
 	 * @param gateID
 	 */
 	public void updatePID(int pID, int gID) {
-		int index = gID - 1;
+		int index = gID;
 		
 		//TESTNG
 		System.out.println("Inside update PID, recieving index " + index + " from flight " + pID );
@@ -184,13 +186,17 @@ public class GateManipulator {
 	 * @param gateID
 	 */
 	public void removePID(int gID) {
-		int index = gID - 1;
+		int index = gID;
 		
-		gateList.get(index).setPlaneID(-1);
-		gateList.set(index, gateList.get(index));
-		
-		//TESTING 
-		System.out.println("Removing plane from gate " + gateList.get(index).getGateName());
+		if(index >= 0) {
+			gateList.get(index).setPlaneID(-1);
+			gateList.set(index, gateList.get(index));
+			
+			//TESTING 
+			System.out.println("Removing plane from gate " + gateList.get(index).getGateName());		
+		}else {
+			System.out.println("There was no plane in this gate!");
+		}
 	}
 	
 	/**
@@ -202,7 +208,7 @@ public class GateManipulator {
 	 * @param gateID
 	 */
 	public void updatingGates(String gName, int pID, int eID, int gID) {
-		int index = gID - 1; 
+		int index = gID; 
 		
 		gateList.get(index).setGateName(gName);
 		gateList.get(index).setPlaneID(pID);
@@ -228,6 +234,7 @@ public class GateManipulator {
      */
     public FlightList convertGateListToFlights(Iterator gateList, Loader ld) {
     	System.out.println("Inside GateManipulator.convertGateListToFlights");
+    	FlightList fl = new FlightList();
     	Iterator gateIter = gateList;
     	Flight flight;
     	
@@ -238,13 +245,33 @@ public class GateManipulator {
     		System.out.println("\tAttempting to add plane parked at " + gate.getGateName() + " to FlightList");
     		
     		flight = fl.getFlightAtGate(gate.getGateID(), ld.getFullFlightList().createIterator()); //get flight at gateId
-    		fl.addToList(flight);
+    		
+    		//if it is in a gate
+    		if(flight.isInGate()) fl.addToList(flight);
     		
     		//TESTING
     		System.out.println("\tFlight " + flight.getFlightId() + " added to FlightList");
     	}
     	
     	return fl;
+    }
+    
+    /**
+     * returns id of gate searched by name
+     * 
+     * @param String gateName
+     * @return int gateId
+     */
+    public int findGateId(String gateName) {
+    	int gateId = -1;
+    	
+    	for(int i = 0; i < gateList.size(); i++) {
+    		if(gateList.get(i).getGateName().equals(gateName)) {
+    			gateId = gateList.get(i).getGateID();
+    		}
+    	}
+    	
+    	return gateId;
     }
 	
 	/**

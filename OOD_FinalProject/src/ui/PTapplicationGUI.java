@@ -23,6 +23,7 @@ import scheduler.Flight;
 import scheduler.FlightList;
 import scheduler.Loader;
 import scheduler.PersistentTime;
+import takeoffandlanding.Landing;
 import takeoffandlanding.Takeoff;
 
 import java.awt.Point;
@@ -69,6 +70,7 @@ public class PTapplicationGUI {
 	private static Loader ld;
 	private static PersistentTime pt;
 	private static Takeoff to;
+	private static Landing ln;
 	private JComboBox comboBox;
 
 	/**
@@ -80,6 +82,7 @@ public class PTapplicationGUI {
 		rm = new RunwayManipulator();
 		ld = new Loader(gm);
 		to = new Takeoff(gm, ld);
+		ln = new Landing(gm, ld);
 		
 		//load assets
 		ld.loadFlights();
@@ -381,6 +384,16 @@ public class PTapplicationGUI {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				TakeoffFrame init = new TakeoffFrame(gm, rm, to, ld);
+				init.createFrame();
+			}
+		});
+		
+		/**
+		 * action listener for the Landing button
+		 */
+		btnLanding.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				LandingFrame init = new LandingFrame(gm, rm, ln, ld);
 				init.createFrame();
 			}
 		});
