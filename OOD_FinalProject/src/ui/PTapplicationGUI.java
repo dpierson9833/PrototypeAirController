@@ -392,8 +392,12 @@ public class PTapplicationGUI {
 		btnTakeoffDeparture.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				TakeoffFrame init = new TakeoffFrame(gm, rm, to, ld);
-				init.createFrame();
+				if(to.getCurrentWeather() == "Clear") {
+					TakeoffFrame init = new TakeoffFrame(gm, rm, to, ld);
+					init.createFrame();					
+				}else {
+					JOptionPane.showMessageDialog(actionPanel, "Weather is SEVERE! No planes may take off!");
+				}
 			}
 		});
 		
@@ -402,8 +406,12 @@ public class PTapplicationGUI {
 		 */
 		btnLanding.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				LandingFrame init = new LandingFrame(gm, rm, ln, ld);
-				init.createFrame();
+				if(to.getCurrentWeather() == "Clear") {
+					LandingFrame init = new LandingFrame(gm, rm, ln, ld);
+					init.createFrame();				
+				}else {
+					JOptionPane.showMessageDialog(actionPanel, "Weather is SEVERE! No planes may take off!");
+				}
 			}
 		});
 		
