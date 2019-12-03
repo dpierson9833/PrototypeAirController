@@ -38,7 +38,6 @@ public class GetCurrentWeather {
 	public static int getWeather(Singleton.Weather weather12, Singleton.Season season) {
 
 		int finalWeather = 0;
-		
 		//String variable that will be sent to PreFlightStatus function 
 
 		Singleton.Season Cseason = season;

@@ -9,7 +9,7 @@ public class DelayFlights {
 	public static void checkFlightStatus(boolean OktoFly) {
 		
 		if (OktoFly = false) {
-				
+			
 		Scanner input = new Scanner(System.in);
 		
 		System.out.println("Weather conditions are severe. Would you like to ground all planes? Yes or No");

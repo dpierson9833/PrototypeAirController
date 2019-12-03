@@ -16,7 +16,6 @@ public class Singleton {
 	enum Weather {
 		CLEAR, SEVERE_WEATHER
 	}
-
 	// Class to randomly choose a value
 	class RandomEnumWeather<E extends Enum<Weather>> {
 		Random RND = new Random();

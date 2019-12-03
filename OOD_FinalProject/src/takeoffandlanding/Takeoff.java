@@ -66,7 +66,6 @@ public class Takeoff {
 	 */	
 	public String getCurrentWeather() {
 		
-		
 		//Test
 		System.out.println("Inside TakeOff.Singleton() -> getWeather");
 		
