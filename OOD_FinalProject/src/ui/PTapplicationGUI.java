@@ -392,7 +392,7 @@ public class PTapplicationGUI {
 		btnTakeoffDeparture.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(to.getCurrentWeather() == "Clear") {
+				if(to.getCurrentWeather().equals("Clear")) {
 					TakeoffFrame init = new TakeoffFrame(gm, rm, to, ld);
 					init.createFrame();					
 				}else {
@@ -406,7 +406,7 @@ public class PTapplicationGUI {
 		 */
 		btnLanding.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(to.getCurrentWeather() == "Clear") {
+				if(to.getCurrentWeather().equals("Clear")) {
 					LandingFrame init = new LandingFrame(gm, rm, ln, ld);
 					init.createFrame();				
 				}else {

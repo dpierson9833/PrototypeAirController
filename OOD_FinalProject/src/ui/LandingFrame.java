@@ -22,6 +22,7 @@ import takeoffandlanding.RunwayControl;
 import takeoffandlanding.Takeoff;
 
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -48,6 +49,7 @@ public class LandingFrame {
 	private RunwayManipulator rm;
 	private Loader ld;
 	private Landing ln;
+	private JButton btnCheckWeather;
 	private FlightList landedFlights = new FlightList();
 	private ArrayList<Integer> flightIds = new ArrayList();
 	private int numTimes;
@@ -106,7 +108,7 @@ public class LandingFrame {
 
 		initRadioButtons();
 
-		JButton btnCheckWeather = new JButton("Check Weather");
+		btnCheckWeather = new JButton("Check Weather");
 
 		btnExecuteLanding = new JButton("Execute Landing");
 
@@ -184,6 +186,13 @@ public class LandingFrame {
 	 * instantiate action listeners for the TakeoffFrame
 	 */
 	public void createEvents() {
+		btnCheckWeather.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Toolkit.getDefaultToolkit().beep();
+				JOptionPane.showMessageDialog(frame, ln.getWeatherString() + " F");
+			}
+		});
+		
 		btnExecuteLanding.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//TESTING
