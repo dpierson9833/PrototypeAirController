@@ -200,7 +200,7 @@ public class GateManipulator {
 	}
 	
 	/**
-	 * update multiple gates
+	 * update multiple data fields in a gate
 	 * 
 	 * @param gateName
 	 * @param planeID

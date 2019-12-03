@@ -9,6 +9,8 @@ import scheduler.Flight;
 import scheduler.FlightList;
 import scheduler.Loader;
 import scheduler.PersistentTime;
+import weather.GetCurrentWeather;
+import weather.Singleton;
 
 /**
  * a class to control the landing functions inside the action panel of the main UI
@@ -26,7 +28,63 @@ public class Landing {
 	private Gates gate;
 	private ArrayList<Gates> eligibleGates;
 	private FlightList landedFlights;
+	private Singleton single = Singleton.getInstance(); //WeatherClass
+	public String condition; //WeatherClass
+	public boolean status; //WeatherClass
+	public String weatherString; //WeatherClass
 	
+	
+	/**
+	 *a class to get current weather condition (Clear or Severe)
+	 *
+	 *@param Singleton.getWeather
+	 *
+	 */	
+	public String getCurrentWeather() {
+		
+		//Test
+		System.out.println("Inside TakeOff.Singleton() -> getWeather");
+		
+		condition = single.getCurrentCondition(single.getWeather());
+		
+		return condition;
+	}
+	
+	/**
+	 *a class to get the String value of weather
+	 *
+	 *@param GetCurrentWeather
+	 *@param getWeather
+	 *@param getSeason
+	 */	
+	public String getWeatherString() {
+		//Test
+		System.out.println("Inside Takeoff.Singleton() -> GetCurrentWeather");
+		
+		weatherString = GetCurrentWeather.getWeatherString(GetCurrentWeather.getWeather(single.getWeather(), single.getSeason()));
+		
+		return weatherString;
+	}
+
+	/**
+	 *a class to get the boolean value of OktoFly
+	 *
+	 *
+	 *
+	 */	
+	
+	public boolean getFlightStatus() {
+		
+		//Test
+		System.out.println("Inside Takeoff.Singleton() -> PreFlight ");
+		
+		single = Singleton.getInstance();
+		
+		return status = single.PreFlight();
+		
+		
+	}
+
 	/**
 	 * constructor for Landing object
 	 * 
@@ -57,7 +115,7 @@ public class Landing {
 		//get current time
 		currentTime = pt.getTime();
 		
-		//get list of eligible flights and check which ones are in gates
+		//get list of eligible flightss
 		eligibleFlights = getQuarterList(currentTime);
 		
 		Iterator flIter = eligibleFlights.createIterator();

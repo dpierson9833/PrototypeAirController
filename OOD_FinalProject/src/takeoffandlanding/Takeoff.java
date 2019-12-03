@@ -73,9 +73,14 @@ public class Takeoff {
 		
 		return condition;
 	}
+
 	/**
-	 * 
-	 */
+	 *a class to get the String value of weather
+	 *
+	 *@param GetCurrentWeather
+	 *@param getWeather
+	 *@param getSeason
+	 */	
 	public String getWeatherString() {
 		//Test
 		System.out.println("Inside Takeoff.Singleton() -> GetCurrentWeather");
@@ -103,18 +108,8 @@ public class Takeoff {
 		
 		
 	}
-	
+		
 	/**
-	 *a class to get the String value of weather
-	 *
-	 *@param GetCurrentWeather
-	 *@param getWeather
-	 *@param getSeason
-	 */	
-	
-
-	
-		/**
 	 * checks the current time in order to decide what 
 	 * planes are able to be launched, and sends the list of occupied gates to the to takeoffFrame class
 	 * 
