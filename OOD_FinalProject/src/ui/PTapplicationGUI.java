@@ -259,7 +259,7 @@ public class PTapplicationGUI {
 		JLabel label = new JLabel("Current Weather:");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
-		JLabel label_1 = new JLabel("74 F");
+		JLabel label_1 = new JLabel(to.getWeatherString() + " F");
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		
 		JLabel label_2 = new JLabel("What Would You Like To Do?");

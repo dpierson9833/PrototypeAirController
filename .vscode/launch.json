@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - PTapplicationGUI",
+            "request": "launch",
+            "mainClass": "ui.PTapplicationGUI",
+            "projectName": "PrototypeAirController1"
+        }
+    ]
+}

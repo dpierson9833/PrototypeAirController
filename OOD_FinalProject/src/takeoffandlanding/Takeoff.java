@@ -38,7 +38,7 @@ public class Takeoff {
 	private List<Gates> filledGateList;
 	private Gates gate;
 	private int currentTime; 
-	private Singleton single; //WeatherClass
+	private Singleton single = Singleton.getInstance(); //WeatherClass
 	public String condition; //WeatherClass
 	public boolean status; //WeatherClass
 	public String weatherString; //WeatherClass
@@ -69,13 +69,22 @@ public class Takeoff {
 		//Test
 		System.out.println("Inside TakeOff.Singleton() -> getWeather");
 		
-		single = Singleton.getInstance();
-		
-		condition = single.getCurrentCondition(Singleton.getWeather());
+		condition = single.getCurrentCondition(single.getWeather());
 		
 		return condition;
 	}
-	
+	/**
+	 * 
+	 */
+	public String getWeatherString() {
+		//Test
+		System.out.println("Inside Takeoff.Singleton() -> GetCurrentWeather");
+		
+		weatherString = GetCurrentWeather.getWeatherString(GetCurrentWeather.getWeather(single.getWeather(), single.getSeason()));
+		
+		return weatherString;
+	}
+
 	/**
 	 *a class to get the boolean value of OktoFly
 	 *
@@ -103,16 +112,7 @@ public class Takeoff {
 	 *@param getSeason
 	 */	
 	
-	public String getWeatherString() {
-		
-		//Test
-		System.out.println("Inside Takeoff.Singleton() -> GetCurrentWeather");
-		
-		weatherString = GetCurrentWeather.getWeatherString(GetCurrentWeather.getWeather(Singleton.getWeather(), Singleton.getSeason()));
-		
-		return weatherString;
-		
-	}
+
 	
 		/**
 	 * checks the current time in order to decide what 
@@ -213,4 +213,6 @@ public class Takeoff {
 		
 		System.out.println("Launched flights successfully set");
 	}
+
+	
 }
