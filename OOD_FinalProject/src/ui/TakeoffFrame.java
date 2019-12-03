@@ -21,15 +21,12 @@ import takeoffandlanding.RunwayControl;
 import takeoffandlanding.Takeoff;
 
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-
 
 /**
  * This class contains the TakeOff Window which is activated by pressing the Take-off and Departure button on the main UI
@@ -42,7 +39,6 @@ public class TakeoffFrame {
 	private JPanel flightListPanel;
 	private JPanel panel_1;
 	private JButton btnExecuteTakeoff;
-	private JButton btnCheckWeather;
 	private JRadioButton rdbtnFlightTo;
 	private JRadioButton rdbtnFlightTo_1;
 	private JRadioButton rdbtnFlightTo_2;
@@ -109,7 +105,7 @@ public class TakeoffFrame {
 		
 		initRadioButtons();
 		
-		btnCheckWeather = new JButton("Check Weather");
+		JButton btnCheckWeather = new JButton("Check Weather");
 		
 		btnExecuteTakeoff = new JButton("Execute Take-Off");
 
@@ -187,14 +183,6 @@ public class TakeoffFrame {
 	 * instantiate action listeners for the TakeoffFrame
 	 */
 	public void createEvents() {
-		btnCheckWeather.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0){
-				//Testing
-				Toolkit.getDefaultToolkit().beep();
-				JOptionPane.showMessageDialog(frame, "Weather is " + to.getWeatherString() + " F");
-
-			}
-		});
 		btnExecuteTakeoff.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//TESTING

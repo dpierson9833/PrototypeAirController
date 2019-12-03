@@ -25,6 +25,7 @@ import scheduler.Loader;
 import scheduler.PersistentTime;
 import takeoffandlanding.Landing;
 import takeoffandlanding.Takeoff;
+import weather.Singleton;
 
 import java.awt.Point;
 import java.awt.event.ActionListener;
@@ -33,6 +34,7 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import javax.swing.JToggleButton;
@@ -63,6 +65,7 @@ public class PTapplicationGUI {
 	private JButton button_4;
 	private JButton button_5;
 	private JButton button_6;
+	private JComboBox comboBox;
 	
 	//declare manipulator
 	private static GateManipulator gm;
@@ -71,13 +74,14 @@ public class PTapplicationGUI {
 	private static PersistentTime pt;
 	private static Takeoff to;
 	private static Landing ln;
-	private JComboBox comboBox;
+	private static Singleton cw;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		pt = PersistentTime.getInstance();
+		cw = Singleton.getInstance();
 		gm = new GateManipulator();
 		rm = new RunwayManipulator();
 		ld = new Loader(gm);
@@ -350,9 +354,6 @@ public class PTapplicationGUI {
 		button_6.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
-				//CHECK CREDENTIALS HERE
-				
 				c.show(panel_1, "loginPanel");
 			}
 		});
@@ -363,7 +364,15 @@ public class PTapplicationGUI {
 		button_5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				c.show(panel_1, "actionPanel");
+				
+				//this is obviously not secure, this project is intended to show off design patterns, not password security
+				//in a real world situation, this would be stored as a hash encrypted key in a database
+				if(textField.getText().equals("root")) {  /*VERY BAD SECURITY*/
+					char[] input = passwordField.getPassword();
+					if(isPasswordCorrect(input)) {
+						c.show(panel_1, "actionPanel");
+					}
+				}	
 			}
 		});
 		
@@ -455,5 +464,27 @@ public class PTapplicationGUI {
 		        System.out.println("Quarter changed to " + pt.getTime() + " in program controller");
 			}
 		});
+	}
+	
+	/**
+	 * utility method for checking password
+	 * 
+	 * @param char[] password
+	 * @return boolean correct
+	 */
+	private static boolean isPasswordCorrect(char[] input) {
+	    boolean isCorrect = true;
+	    char[] correctPassword = {'p', 'a', 's', 's'};
+
+	    if (input.length != correctPassword.length) {
+	        isCorrect = false;
+	    } else {
+	        isCorrect = Arrays.equals (input, correctPassword);
+	    }
+
+	    //Zero out the password.
+	    Arrays.fill(correctPassword,'0');
+
+	    return isCorrect;
 	}
 }

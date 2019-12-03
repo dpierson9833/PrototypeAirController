@@ -6,7 +6,6 @@ import javax.swing.JRadioButton;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.Toolkit;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
@@ -41,7 +40,6 @@ public class LandingFrame {
 	private JPanel flightListPanel;
 	private JPanel panel_1;
 	private JButton btnExecuteLanding;
-	private JButton btnCheckWeather;
 	private JRadioButton rdbtnFlightTo;
 	private JRadioButton rdbtnFlightTo_1;
 	private JRadioButton rdbtnFlightTo_2;
@@ -53,7 +51,6 @@ public class LandingFrame {
 	private FlightList landedFlights = new FlightList();
 	private ArrayList<Integer> flightIds = new ArrayList();
 	private int numTimes;
-	
 
 	/**
 	 * Create the application.
@@ -109,7 +106,7 @@ public class LandingFrame {
 
 		initRadioButtons();
 
-		btnCheckWeather = new JButton("Check Weather");
+		JButton btnCheckWeather = new JButton("Check Weather");
 
 		btnExecuteLanding = new JButton("Execute Landing");
 
@@ -187,15 +184,6 @@ public class LandingFrame {
 	 * instantiate action listeners for the TakeoffFrame
 	 */
 	public void createEvents() {
-		
-		btnCheckWeather.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0){
-				//Testing
-				Toolkit.getDefaultToolkit().beep();
-				JOptionPane.showMessageDialog(frame, "Weather is " + ln.getWeatherString() + " F");
-
-			}
-		});
 		btnExecuteLanding.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//TESTING
