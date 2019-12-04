@@ -17,6 +17,7 @@ public class Singleton {
 		CLEAR, SEVERE_WEATHER
 	}
 	// Class to randomly choose a value
+	
 	class RandomEnumWeather<E extends Enum<Weather>> {
 		Random RND = new Random();
 		E[] values;
@@ -32,10 +33,13 @@ public class Singleton {
 	}
 
 	// **********************************************
+	
+	
 	class RandomEnumSeason<E extends Enum<Season>> {
+	
 		Random RND = new Random();
 		E[] values;
-
+		
 		public RandomEnumSeason(Class<E> token) {
 			values = token.getEnumConstants();
 		}
@@ -46,24 +50,19 @@ public class Singleton {
 
 	}
 
-	// Randomly picks a season from Enum list
+	// List all the enums for season
 	RandomEnumSeason<Season> r = new RandomEnumSeason<Season>(Season.class);
 
-	// Randomly picks a weather condition from Enum list
+	// List all the enums for weather
 	RandomEnumWeather<Weather> e = new RandomEnumWeather<Weather>(Weather.class);
 
 	// Generates a random season
+	
 	Season Cseason = r.randomSeason();
-
+	
 	// Generates a random weather event
 	Weather Cweather = e.randomWeather();
-
-	//Weather condition = weather1;
-	
-
-	//Season Currseason = Cseason;
-	
-	
+		
 	boolean status = false;
 
 	// Private singleton to prevent instantiation.

@@ -189,7 +189,7 @@ public class LandingFrame {
 		btnCheckWeather.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Toolkit.getDefaultToolkit().beep();
-				JOptionPane.showMessageDialog(frame, ln.getWeatherString() + " F");
+				JOptionPane.showMessageDialog(frame, ln.weatherString + " F");
 			}
 		});
 		

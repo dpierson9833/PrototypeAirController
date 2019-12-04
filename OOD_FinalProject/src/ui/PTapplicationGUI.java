@@ -452,7 +452,7 @@ public class PTapplicationGUI {
 		});
 		
 		/**
-		 * action lisener for the Select Time Combo box
+		 * action listener for the Select Time Combo box
 		 */
 		comboBox.addActionListener(new ActionListener() {
 			@Override

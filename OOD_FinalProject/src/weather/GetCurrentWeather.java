@@ -1,6 +1,8 @@
 package weather;
 import java.util.Random;
 
+import weather.Singleton.Season;
+
 public class GetCurrentWeather {
 
 //Returns string of Clear or Severe 
@@ -22,7 +24,7 @@ public class GetCurrentWeather {
 	}
 	
 	
-//Returns strng of weather value	
+//Returns string of weather value	
 	public static String getWeatherString(int weather) {
 		
 		String weatherString; 
@@ -33,7 +35,6 @@ public class GetCurrentWeather {
 		
 	}
 	
-	
 //int return type 
 	public static int getWeather(Singleton.Weather weather12, Singleton.Season season) {
 
@@ -43,6 +44,10 @@ public class GetCurrentWeather {
 		Singleton.Season Cseason = season;
 
 		Singleton.Weather weather1 = weather12;
+		
+		if (Cseason!=Season.WINTER) {
+			Cseason = Season.WINTER;
+		}
 
 		Random randomGenerator = new Random();
 
@@ -178,9 +183,9 @@ public class GetCurrentWeather {
 			finalWeather = result;
 			
 			break;
-		}
+		} 
 		return finalWeather;
 		
+		} 
 	}
 
-}
