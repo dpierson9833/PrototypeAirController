@@ -66,9 +66,9 @@ public class GetCurrentWeather {
 
 			case CLEAR:
 
-				lowTemp = 25;
+				lowTemp = 10;
 				
-				highTemp = 51;
+				highTemp = 76;
 				
 				System.out.println("Weather conditions are clear.");
 
@@ -76,7 +76,7 @@ public class GetCurrentWeather {
 
 			case SEVERE_WEATHER:
 
-				lowTemp = -31;
+				lowTemp = -5;
 				
 				highTemp = 0;
 				
