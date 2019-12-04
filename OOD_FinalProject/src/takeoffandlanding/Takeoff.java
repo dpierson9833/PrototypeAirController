@@ -43,7 +43,6 @@ public class Takeoff {
 	public boolean status; //WeatherClass
 	public String weatherString; //WeatherClass
 	
-
 	
 	/**
 	 * a constructor for the takeoff class

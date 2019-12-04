@@ -45,6 +45,7 @@ public class GetCurrentWeather {
 
 		Singleton.Weather weather1 = weather12;
 		
+		//if statement to keep weather as winter
 		if (Cseason!=Season.WINTER) {
 			Cseason = Season.WINTER;
 		}

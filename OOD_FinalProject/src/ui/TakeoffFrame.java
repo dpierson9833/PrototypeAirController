@@ -189,7 +189,7 @@ public class TakeoffFrame {
 		btnCheckWeather.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Toolkit.getDefaultToolkit().beep();
-				JOptionPane.showMessageDialog(frame, to.weatherString+ " F");
+				JOptionPane.showMessageDialog(frame, to.weatherString+ " F"); //constant weather
 			}
 		});
 		

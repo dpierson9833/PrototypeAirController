@@ -109,33 +109,12 @@ public class Singleton {
 		
 		return weatherCondition;
 	}
-//	
-//	public int getCurrentWeather(Weather condition, Season Currseason) {
-//		
-//		int currentWeather = GetCurrentWeather.getWeather(condition, Currseason);
-//		
-//		newWeather = currentWeather;
-//		
-//		
-//		return newWeather;
-//	}
-//	
+
 //
 	public boolean PreFlight() {
 		return status = Preflight.PreFlightStatus(Cweather);	
 	}
 //
-////	public void DelayFlights(boolean status) {
-////		DelayFlights.GroundFlights(status);
-////	}
-//	
-//	public void DisplayCurrentWeather() {
-//		
-//		DisplayCurrentWeather newW = new DisplayCurrentWeather();
-//		
-//		newW.DisplayWeather(newWeather);
-//		
-//		newW.DisplayCondition(weatherCondition);
-//	}
+
 
 }
