@@ -25,6 +25,7 @@ import scheduler.Loader;
 import scheduler.PersistentTime;
 import takeoffandlanding.Landing;
 import takeoffandlanding.Takeoff;
+import weather.GetCurrentWeather;
 import weather.Singleton;
 
 import java.awt.Point;
@@ -406,7 +407,7 @@ public class PTapplicationGUI {
 		 */
 		btnLanding.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(to.getCurrentWeather().equals("Clear")) {
+				if(ln.getCurrentWeather().equals("Clear")) {
 					LandingFrame init = new LandingFrame(gm, rm, ln, ld);
 					init.createFrame();				
 				}else {
@@ -463,10 +464,22 @@ public class PTapplicationGUI {
 					case "Quarter 1": pt.setTime(1);
 						break;
 					case "Quarter 2": pt.setTime(2);
+						if (cw.getWeather().equals(Singleton.Weather.CLEAR)){
+							cw.setWeather(Singleton.Weather.SEVERE_WEATHER);
+						} else {
+						cw.setWeather(Singleton.Weather.CLEAR);
+						}
 						break;
 					case "Quarter 3": pt.setTime(3);
+					if (cw.getWeather().equals(Singleton.Weather.SEVERE_WEATHER)){
+						cw.setWeather(Singleton.Weather.CLEAR);
+					} else {
+					cw.setWeather(Singleton.Weather.CLEAR);
+					}
 						break;
 					case "Quarter 4": pt.setTime(4);
+						cw.setWeather(Singleton.Weather.CLEAR);
+						 
 						break;
 		        }
 		        System.out.println("Quarter changed to " + pt.getTime() + " in program controller");

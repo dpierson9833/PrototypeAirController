@@ -40,10 +40,9 @@ public class Landing {
 	 *@param Singleton.getWeather
 	 *
 	 */	
-	public String getCurrentWeather() {
-		
+	public String getCurrentWeather() {	
 		//Test
-		System.out.println("Inside TakeOff.Singleton() -> getWeather");
+		System.out.println("Inside Landing.Singleton() -> getWeather");
 		
 		condition = single.getCurrentCondition(single.getWeather());
 		
@@ -59,7 +58,7 @@ public class Landing {
 	 */	
 	public String getWeatherString() {
 		//Test
-		System.out.println("Inside Takeoff.Singleton() -> GetCurrentWeather");
+		System.out.println("Inside Landing.Singleton() -> GetCurrentWeather");
 		
 		weatherString = GetCurrentWeather.getWeatherString(GetCurrentWeather.getWeather(single.getWeather(), single.getSeason()));
 		

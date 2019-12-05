@@ -20,6 +20,7 @@ public class DelayFlights {
 			DelayFlights.GroundFlights(OktoFly);
 		}
 		
+		
 		//Else if no send to class that allows manual change of flights 
 		
 		System.out.println("Ground planes. Conditions are not favorable for flight");	
