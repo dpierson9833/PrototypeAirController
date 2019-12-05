@@ -46,8 +46,8 @@ public class Loader {
 		//Departing Flights
 		Flight flight1 = new Flight(1, "2019-01-01", "ATL", "ADQ", "C3", -1, 10, -1);//departing
     	Flight flight2 = new Flight(2, "2019-01-01", "ATL", "PWN", "B10", -1, 21, -1);//departing
-    	Flight flight3 = new Flight(3, "2019-01-01", "ATL", "PWN", "A7", -1, 56, -1);//departing
-        Flight flight7 = new Flight(7, "2019-01-01", "ATL", "IWA", "A13", -1, 74, -1);//departing
+    	Flight flight3 = new Flight(3, "2019-01-01", "ATL", "PWN", "A7", 7, 56, -1);//departing
+        Flight flight7 = new Flight(7, "2019-01-01", "ATL", "IWA", "A13", 8, 74, -1);//departing
     	Flight flight10 = new Flight(10, "2019-01-01", "ATL", "OKC", "C8", -1, 91, -1);//departing
  		//end of departing flights	
  			
