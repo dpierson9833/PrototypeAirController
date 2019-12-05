@@ -23,8 +23,8 @@ public class GateManipulator {
 	private Gates a5 = new Gates("T3", -1, 4, 4);
 	private Gates a6 = new Gates("B13", -1, 5, 5);
 	private Gates a7 = new Gates("A13", -1, 6, 6);
-	private Gates a8 = new Gates("C11", -1, 7, 7);
-	private Gates a9 = new Gates("A1", -1, 8, 8);
+	private Gates a8 = new Gates("C11", 3, 7, 7);
+	private Gates a9 = new Gates("A1", 7, 8, 8);
 	private Gates a10 = new Gates("C8", -1, 9, 9);
 	private Gates a11 = new Gates("B7", -1, 10, 10);
 	private Gates a12 = new Gates("T6", -1, 11, 11);
